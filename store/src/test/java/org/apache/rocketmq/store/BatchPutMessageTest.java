@@ -48,6 +48,10 @@ public class BatchPutMessageTest {
     public static final char PROPERTY_SEPARATOR = 2;
     public final static Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
+    /**
+     * 初始化 MessageStore
+     * @throws Exception
+     */
     @Before
     public void init() throws Exception {
         messageStore = buildMessageStore();
@@ -56,6 +60,9 @@ public class BatchPutMessageTest {
         messageStore.start();
     }
 
+    /**
+     * 销毁 MessageStore
+     */
     @After
     public void destory() {
         messageStore.shutdown();
@@ -64,12 +71,21 @@ public class BatchPutMessageTest {
         UtilAll.deleteFile(new File(System.getProperty("user.home") + File.separator + "putmessagesteststore"));
     }
 
+    /**
+     * 创建
+     * @return
+     * @throws Exception
+     */
     private MessageStore buildMessageStore() throws Exception {
         MessageStoreConfig messageStoreConfig = new MessageStoreConfig();
+        /* commitlog 长度 */
         messageStoreConfig.setMappedFileSizeCommitLog(1024 * 8);
+        /* ConsumeQueue 长度 */
         messageStoreConfig.setMappedFileSizeConsumeQueue(1024 * 4);
+        /* */
         messageStoreConfig.setMaxHashSlotNum(100);
         messageStoreConfig.setMaxIndexNum(100 * 10);
+        /* 写硬盘方式 */
         messageStoreConfig.setFlushDiskType(FlushDiskType.SYNC_FLUSH);
         messageStoreConfig.setFlushIntervalConsumeQueue(1);
         messageStoreConfig.setStorePathRootDir(System.getProperty("user.home") + File.separator + "putmessagesteststore");
