@@ -24,6 +24,9 @@ public class MessageExtBrokerInner extends MessageExt {
     private String propertiesString;
     private long tagsCode;
 
+    /* 查询 indexId */
+    private String indexId;
+
     public static long tagsString2tagsCode(final TopicFilterType filter, final String tags) {
         if (null == tags || tags.length() == 0) { return 0; }
 
@@ -48,5 +51,13 @@ public class MessageExtBrokerInner extends MessageExt {
 
     public void setTagsCode(long tagsCode) {
         this.tagsCode = tagsCode;
+    }
+
+    public String getIndexId() {
+        return indexId;
+    }
+
+    public void setIndexId(String indexId) {
+        this.indexId = indexId;
     }
 }

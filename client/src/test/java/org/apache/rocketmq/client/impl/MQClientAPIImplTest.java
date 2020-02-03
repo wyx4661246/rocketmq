@@ -17,6 +17,8 @@
 package org.apache.rocketmq.client.impl;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import org.apache.rocketmq.client.ClientConfig;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;

@@ -55,6 +55,7 @@ import org.apache.rocketmq.namesrv.NamesrvController;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.apache.rocketmq.remoting.exception.RemotingCommandException;
 import org.apache.rocketmq.remoting.netty.NettyRequestProcessor;
+import org.apache.rocketmq.remoting.protocol.LanguageCode;
 import org.apache.rocketmq.remoting.protocol.RemotingCommand;
 
 public class DefaultRequestProcessor implements NettyRequestProcessor {
@@ -75,6 +76,11 @@ public class DefaultRequestProcessor implements NettyRequestProcessor {
                 request.getCode(),
                 RemotingHelper.parseChannelRemoteAddr(ctx.channel()),
                 request);
+        }
+
+        /* 禁用 PHP 客户端 */
+        if(LanguageCode.PHP.equals(request.getLanguage())){
+            return null;
         }
 
 
